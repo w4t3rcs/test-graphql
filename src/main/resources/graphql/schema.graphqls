@@ -7,8 +7,20 @@ type User {
     birthDate: String!
 }
 
+input UserInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    birthDate: String!
+}
+
 type Query {
     users: [User]!
     userById(id: ID): User
     userByEmail(email: String): User
+}
+
+type Mutation {
+    addUser(userInput: UserInput): User
 }

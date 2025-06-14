@@ -2,6 +2,7 @@ package io.w4t3rcs.testgraphqll;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -23,5 +24,10 @@ public class UserController {
     @QueryMapping
     public User userByEmail(@Argument String email) {
         return userRepository.findByEmail(email).orElseThrow();
+    }
+
+    @MutationMapping
+    public User addUser(@Argument UserInput userInput) {
+        return userRepository.save(userInput.toUser());
     }
 }
